@@ -207,7 +207,7 @@ mod tests {
 
         let plan = engine.deliberate(Uuid::new_v4(), gaps, &model);
         assert_eq!(plan.actions.len(), 2); // max 2 in cautious
-        assert!(plan.deferred.len() >= 1);
+        assert!(!plan.deferred.is_empty());
     }
 
     #[test]

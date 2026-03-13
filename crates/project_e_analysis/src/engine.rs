@@ -65,18 +65,14 @@ impl AnalysisEngine {
             .take(self.config.max_gap_reports_per_cycle)
             .collect();
 
-        let gap_count = filtered
-            .iter()
-            .filter(|r| r.classification == project_e_core::types::GapClassification::Gap)
-            .count();
-        let conflict_count = filtered
-            .iter()
-            .filter(|r| r.classification == project_e_core::types::GapClassification::Conflict)
-            .count();
-        let confirmation_count = filtered
-            .iter()
-            .filter(|r| r.classification == project_e_core::types::GapClassification::Confirmation)
-            .count();
+        let (mut gap_count, mut conflict_count, mut confirmation_count) = (0, 0, 0);
+        for r in &filtered {
+            match r.classification {
+                project_e_core::types::GapClassification::Gap => gap_count += 1,
+                project_e_core::types::GapClassification::Conflict => conflict_count += 1,
+                project_e_core::types::GapClassification::Confirmation => confirmation_count += 1,
+            }
+        }
 
         self.event_bus
             .emit(CognitiveEvent::GapReportReady {

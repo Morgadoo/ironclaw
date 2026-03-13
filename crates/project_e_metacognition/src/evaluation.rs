@@ -56,7 +56,7 @@ pub enum HomeostaticAction {
 }
 
 /// Pair of modules detected as redundant.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RedundancyPair {
     pub module_a: Uuid,
     pub module_b: Uuid,

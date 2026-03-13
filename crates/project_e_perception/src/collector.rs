@@ -93,11 +93,7 @@ impl DataCollector {
         scored_items.retain(|item| item.relevance_score >= self.config.min_relevance_score);
 
         // Sort by relevance descending
-        scored_items.sort_by(|a, b| {
-            b.relevance_score
-                .partial_cmp(&a.relevance_score)
-                .unwrap_or(std::cmp::Ordering::Equal)
-        });
+        scored_items.sort_by(|a, b| b.relevance_score.total_cmp(&a.relevance_score));
 
         let avg_relevance = if scored_items.is_empty() {
             0.0

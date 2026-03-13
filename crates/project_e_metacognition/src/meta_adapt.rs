@@ -11,7 +11,7 @@ use project_e_core::error::{ProjectEError, Result};
 use crate::evaluation::CycleEvaluation;
 
 /// Adjusted configuration parameters produced by meta-adaptation.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct AdaptiveConfig {
     pub min_decision_confidence: Option<f32>,
     pub min_relevance_score: Option<f32>,
@@ -35,14 +35,7 @@ impl MetaAdaptationEngine {
     /// Returns adjusted parameters (only fields that changed are Some).
     pub fn adapt(&self, evaluations: &[CycleEvaluation]) -> AdaptiveConfig {
         if evaluations.len() < self.config.adaptation_frequency_cycles {
-            return AdaptiveConfig {
-                min_decision_confidence: None,
-                min_relevance_score: None,
-                max_actions_per_cycle: None,
-                novelty_weight: None,
-                coverage_weight: None,
-                magnitude_weight: None,
-            };
+            return AdaptiveConfig::default();
         }
 
         let window: Vec<&CycleEvaluation> = evaluations
@@ -54,14 +47,7 @@ impl MetaAdaptationEngine {
         let avg_efficiency =
             window.iter().map(|e| e.forge_efficiency).sum::<f32>() / window.len() as f32;
 
-        let mut adjusted = AdaptiveConfig {
-            min_decision_confidence: None,
-            min_relevance_score: None,
-            max_actions_per_cycle: None,
-            novelty_weight: None,
-            coverage_weight: None,
-            magnitude_weight: None,
-        };
+        let mut adjusted = AdaptiveConfig::default();
 
         // If efficiency is declining, tighten confidence threshold
         if avg_efficiency < 0.4 {

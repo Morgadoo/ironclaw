@@ -150,7 +150,7 @@ mod tests {
     async fn list_by_state() {
         let store = ModuleStore::new();
 
-        let mut m1 = make_module("draft-module");
+        let m1 = make_module("draft-module");
         store.insert(m1.clone()).await.unwrap();
 
         let mut m2 = make_module("active-module");

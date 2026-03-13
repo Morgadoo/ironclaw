@@ -67,8 +67,9 @@ impl RelevanceScorer {
         }
 
         // Heuristic: content with more unique tokens is more novel
-        let tokens: HashSet<&str> = content.split_whitespace().collect();
-        let uniqueness = tokens.len() as f32 / content.split_whitespace().count().max(1) as f32;
+        let words: Vec<&str> = content.split_whitespace().collect();
+        let unique: HashSet<&str> = words.iter().copied().collect();
+        let uniqueness = unique.len() as f32 / words.len().max(1) as f32;
 
         // Content length contribution (longer = more substance, diminishing returns)
         let length_score = (content.len() as f32 / 1000.0).min(1.0);
