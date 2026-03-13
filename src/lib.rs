@@ -60,6 +60,8 @@ pub mod llm;
 pub mod observability;
 pub mod orchestrator;
 pub mod pairing;
+#[cfg(feature = "project_e")]
+pub mod project_e;
 pub mod registry;
 pub mod safety;
 pub mod sandbox;
