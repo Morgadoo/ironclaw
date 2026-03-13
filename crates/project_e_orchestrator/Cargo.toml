@@ -1,0 +1,23 @@
+[package]
+name = "project-e-orchestrator"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.92"
+description = "CycleOrchestrator and Supervisor for autonomous cognitive cycle execution"
+
+[dependencies]
+async-trait = "0.1"
+chrono = { version = "0.4", features = ["serde"] }
+project-e-core = { path = "../project_e_core" }
+project-e-event-bus = { path = "../project_e_event_bus" }
+project-e-perception = { path = "../project_e_perception" }
+project-e-analysis = { path = "../project_e_analysis" }
+project-e-metacognition = { path = "../project_e_metacognition" }
+project-e-forge = { path = "../project_e_forge" }
+project-e-registry = { path = "../project_e_registry" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["sync", "time"] }
+tracing = "0.1"
+uuid = { version = "1", features = ["v4", "serde"] }
