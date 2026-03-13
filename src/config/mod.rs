@@ -7,6 +7,8 @@
 
 mod agent;
 mod builder;
+#[cfg(feature = "project_e")]
+mod project_e;
 mod channels;
 mod database;
 mod embeddings;
@@ -51,6 +53,8 @@ pub use self::skills::SkillsConfig;
 pub use self::transcription::TranscriptionConfig;
 pub use self::tunnel::TunnelConfig;
 pub use self::wasm::WasmConfig;
+#[cfg(feature = "project_e")]
+pub use self::project_e::ProjectEIronclawConfig;
 pub use crate::llm::config::{
     BedrockConfig, CacheRetention, LlmConfig, NearAiConfig, OAUTH_PLACEHOLDER,
     RegistryProviderConfig,
@@ -98,6 +102,10 @@ pub struct Config {
     /// Channel-relay integration (Slack via external relay service).
     /// Present only when both `CHANNEL_RELAY_URL` and `CHANNEL_RELAY_API_KEY` are set.
     pub relay: Option<RelayConfig>,
+    /// Project E cognitive architecture integration.
+    /// Present only when the `project_e` feature is enabled.
+    #[cfg(feature = "project_e")]
+    pub project_e: ProjectEIronclawConfig,
 }
 
 impl Config {
@@ -172,6 +180,8 @@ impl Config {
             search: WorkspaceSearchConfig::default(),
             observability: crate::observability::ObservabilityConfig::default(),
             relay: None,
+            #[cfg(feature = "project_e")]
+            project_e: ProjectEIronclawConfig::disabled(),
         }
     }
 
@@ -327,6 +337,8 @@ impl Config {
                 backend: std::env::var("OBSERVABILITY_BACKEND").unwrap_or_else(|_| "none".into()),
             },
             relay: RelayConfig::from_env(),
+            #[cfg(feature = "project_e")]
+            project_e: ProjectEIronclawConfig::resolve()?,
         })
     }
 }

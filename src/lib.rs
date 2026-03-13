@@ -56,6 +56,8 @@ pub mod history;
 pub mod hooks;
 #[cfg(feature = "import")]
 pub mod import;
+#[cfg(feature = "project_e")]
+pub mod project_e;
 pub mod llm;
 pub mod observability;
 pub mod orchestrator;
