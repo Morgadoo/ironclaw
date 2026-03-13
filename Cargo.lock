@@ -3396,6 +3396,16 @@ dependencies = [
  "pgvector",
  "postgres-types",
  "pretty_assertions",
+ "project-e-analysis",
+ "project-e-core",
+ "project-e-event-bus",
+ "project-e-forge",
+ "project-e-knowledge-base",
+ "project-e-metacognition",
+ "project-e-orchestrator",
+ "project-e-perception",
+ "project-e-registry",
+ "project-e-skills",
  "rand 0.8.5",
  "readabilityrs",
  "refinery",
@@ -4800,6 +4810,173 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "project-e-analysis"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-core"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "glob",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "toml",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-event-bus"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-forge"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "syn 2.0.117",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-knowledge-base"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-metacognition"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "glob",
+ "project-e-analysis",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "toml",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-orchestrator"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-analysis",
+ "project-e-core",
+ "project-e-event-bus",
+ "project-e-forge",
+ "project-e-metacognition",
+ "project-e-perception",
+ "project-e-registry",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-perception"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-registry"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "project-e-event-bus",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
+name = "project-e-skills"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "project-e-core",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
 ]
 
 [[package]]

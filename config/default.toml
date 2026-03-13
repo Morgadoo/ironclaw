@@ -1,0 +1,104 @@
+# Project E — Default Configuration
+# This is the base configuration. Override with instance-specific TOML files.
+
+[instance]
+name = "default"
+sector = "general"
+region = "global"
+
+# --- LLM Configuration ---
+[llm.circuit_breaker]
+enabled = true
+probe_interval = 30      # seconds
+failure_threshold = 5
+cooldown = 60             # seconds
+probe_timeout = 5         # seconds
+
+[llm.phase_routing]
+perception = "model_for_analysis"
+interpretation = "model_for_analysis"
+deliberation = "model_for_analysis"
+action = "model_for_generation"
+evaluation = "model_for_analysis"
+meta_adaptation = "model_for_analysis"
+
+# --- Perception ---
+[perception]
+min_relevance_score = 0.4
+novelty_weight = 0.4
+coverage_weight = 0.35
+magnitude_weight = 0.25
+
+# --- Analysis ---
+[analysis]
+confidence_threshold = 0.6
+max_gap_reports_per_cycle = 20
+bm25_top_k = 20
+cosine_rerank_k = 5
+
+# --- Metacognition ---
+[metacognition]
+min_decision_confidence = 0.7
+reflection_window = 10
+recovery_threshold = 0.3
+cautious_threshold = 0.6
+
+# --- Forge ---
+[forge]
+max_retries = 3
+compile_timeout_secs = 120
+clippy_timeout_secs = 60
+audit_timeout_secs = 30
+test_timeout_secs = 120
+
+# --- Evaluation ---
+[evaluation]
+monitoring_window_secs = 300
+redundancy_threshold = 0.95
+auto_deprecate_failure_rate = 0.5
+deprecation_grace_days = 30
+
+# --- Meta-Adaptation ---
+[meta]
+adaptation_frequency_cycles = 5
+adjustment_max_step = 0.1
+lesson_repeat_threshold = 3
+
+# --- Limits ---
+[limits]
+max_actions_per_cycle = 10
+max_concurrent_actions = 3
+max_llm_calls_per_day = 500
+
+# --- Health Thresholds ---
+[health]
+min_coverage = 0.5
+min_stability = 0.7
+min_efficiency = 0.4
+min_utilization = 0.3
+min_freshness = 0.5
+
+# --- Deliberation Policies ---
+[deliberation]
+risk_threshold = 0.7
+
+[[deliberation.policies.rules]]
+pattern = "module.create.simple"
+action = "allow"
+
+[[deliberation.policies.rules]]
+pattern = "module.create.complex"
+action = "allow"
+condition = { min_confidence = 0.8 }
+
+[[deliberation.policies.rules]]
+pattern = "module.deprecate.*"
+action = "ask"
+
+[[deliberation.policies.rules]]
+pattern = "module.remove.*"
+action = "deny"
+
+[[deliberation.policies.rules]]
+pattern = "module.merge.*"
+action = "ask"

@@ -1,5 +1,18 @@
 [workspace]
-members = [".", "crates/ironclaw_safety"]
+members = [
+    ".",
+    "crates/ironclaw_safety",
+    "crates/project_e_core",
+    "crates/project_e_event_bus",
+    "crates/project_e_perception",
+    "crates/project_e_analysis",
+    "crates/project_e_metacognition",
+    "crates/project_e_forge",
+    "crates/project_e_registry",
+    "crates/project_e_knowledge_base",
+    "crates/project_e_skills",
+    "crates/project_e_orchestrator",
+]
 exclude = [
     "channels-src/discord",
     "channels-src/telegram",
@@ -101,6 +114,18 @@ cron = "0.13"
 
 # Safety/sanitization
 ironclaw_safety = { path = "crates/ironclaw_safety", version = "0.1.0" }
+
+# Project E — cognitive architecture (optional, enabled via --features project_e)
+project_e_core = { package = "project-e-core", path = "crates/project_e_core", optional = true }
+project_e_event_bus = { package = "project-e-event-bus", path = "crates/project_e_event_bus", optional = true }
+project_e_perception = { package = "project-e-perception", path = "crates/project_e_perception", optional = true }
+project_e_analysis = { package = "project-e-analysis", path = "crates/project_e_analysis", optional = true }
+project_e_metacognition = { package = "project-e-metacognition", path = "crates/project_e_metacognition", optional = true }
+project_e_forge = { package = "project-e-forge", path = "crates/project_e_forge", optional = true }
+project_e_orchestrator = { package = "project-e-orchestrator", path = "crates/project_e_orchestrator", optional = true }
+project_e_registry = { package = "project-e-registry", path = "crates/project_e_registry", optional = true }
+project_e_knowledge_base = { package = "project-e-knowledge-base", path = "crates/project_e_knowledge_base", optional = true }
+project_e_skills = { package = "project-e-skills", path = "crates/project_e_skills", optional = true }
 regex = "1"
 aho-corasick = "1"
 
@@ -216,6 +241,18 @@ integration = []
 html-to-markdown = ["dep:html-to-markdown-rs", "dep:readabilityrs"]
 bedrock = ["dep:aws-config", "dep:aws-sdk-bedrockruntime", "dep:aws-smithy-types"]
 import = ["dep:json5", "libsql"]
+project_e = [
+    "dep:project_e_core",
+    "dep:project_e_event_bus",
+    "dep:project_e_perception",
+    "dep:project_e_analysis",
+    "dep:project_e_metacognition",
+    "dep:project_e_forge",
+    "dep:project_e_orchestrator",
+    "dep:project_e_registry",
+    "dep:project_e_knowledge_base",
+    "dep:project_e_skills",
+]
 
 [[test]]
 name = "html_to_markdown"

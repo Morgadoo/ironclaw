@@ -242,6 +242,9 @@ async fn async_main() -> anyhow::Result<()> {
     .build_all()
     .await?;
 
+    #[cfg(feature = "project_e")]
+    let project_e_handle = ironclaw::project_e::init::init_project_e(&components);
+
     let config = components.config;
 
     // ── Tunnel setup ───────────────────────────────────────────────────
@@ -908,6 +911,20 @@ async fn async_main() -> anyhow::Result<()> {
 
     // Signal background tasks (SIGHUP handler, etc.) to gracefully shut down
     let _ = shutdown_tx.send(());
+
+    #[cfg(feature = "project_e")]
+    if let Some(handle) = project_e_handle {
+        let _ = handle.shutdown_tx.send(true);
+        if let Err(e) = handle.runner_handle.await {
+            tracing::warn!("Project E runner task did not shut down cleanly: {}", e);
+        }
+        if let Err(e) = handle.event_subscriber_handle.await {
+            tracing::warn!(
+                "Project E event subscriber task did not shut down cleanly: {}",
+                e
+            );
+        }
+    }
 
     // Shut down all stdio MCP server child processes.
     components.mcp_process_manager.shutdown_all().await;
