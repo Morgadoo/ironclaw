@@ -1,5 +1,18 @@
 [workspace]
-members = [".", "crates/ironclaw_safety"]
+members = [
+    ".",
+    "crates/ironclaw_safety",
+    "crates/project_e_core",
+    "crates/project_e_event_bus",
+    "crates/project_e_perception",
+    "crates/project_e_analysis",
+    "crates/project_e_metacognition",
+    "crates/project_e_forge",
+    "crates/project_e_registry",
+    "crates/project_e_knowledge_base",
+    "crates/project_e_skills",
+    "crates/project_e_orchestrator",
+]
 exclude = [
     "channels-src/discord",
     "channels-src/telegram",
